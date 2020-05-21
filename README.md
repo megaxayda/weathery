@@ -1,2 +1,2 @@
 # weathery
-Small weather app: Seach city, get five day weather forecast
+Small weather app: Search city, get five day weather forecast.
