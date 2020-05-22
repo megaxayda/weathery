@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, Suspense, lazy } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Axios from 'axios';
@@ -6,8 +6,9 @@ import Spinner from 'react-bootstrap/Spinner';
 
 import './App.css';
 import { ERROR } from 'util/const';
-import SearchInput from 'components/search-input/SearchInput';
-import ForecastList from 'components/forecast-list/ForecastList';
+
+const SearchInput = lazy(() => import('components/search-input/SearchInput'));
+const ForecastList = lazy(() => import('components/forecast-list/ForecastList'));
 
 function App() {
   const isFirstRun = useRef(true);
@@ -46,20 +47,21 @@ function App() {
   }, [cityId]);
 
   const onSelect = (cityId) => {
-    console.log(cityId);
     setCityId(cityId);
   };
 
   return (
     <Container fluid>
       <h1 className="text-center">Weathery</h1>
-      <SearchInput onSelect={onSelect}></SearchInput>
-      {isLoading && (
-        <Row className="justify-content-md-center">
-          <Spinner className="text-center" animation="border" role="status"></Spinner>
-        </Row>
-      )}
-      <ForecastList forecastData={fivedayData}></ForecastList>
+      <Suspense fallback={<></>}>
+        <SearchInput onSelect={onSelect}></SearchInput>
+        {isLoading && (
+          <Row className="justify-content-md-center">
+            <Spinner className="text-center" animation="border" role="status"></Spinner>
+          </Row>
+        )}
+        <ForecastList forecastData={fivedayData}></ForecastList>
+      </Suspense>
     </Container>
   );
 }

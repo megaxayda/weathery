@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, Suspense, lazy } from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Row from 'react-bootstrap/Row';
@@ -8,10 +8,11 @@ import PropTypes from 'prop-types';
 import Axios from 'axios';
 
 import './searchInput.css';
-import DropdownItem from './DropdownItem';
 import useDebounce from 'hook/useDebounce';
 import useOnClickOutside from 'hook/useOnClickOutside';
 import { ERROR } from 'util/const';
+
+const DropdownItem = lazy(() => import('./DropdownItem'));
 
 function SearchInput({ onSelect }) {
   const searchInputRef = useRef();
@@ -92,13 +93,15 @@ function SearchInput({ onSelect }) {
           {isLoading && <Spinner animation="border" role="status"></Spinner>}
         </InputGroup>
 
-        {isOpenDropdown && searchResult.length > 0 && (
-          <div className="custom_dropdown" ref={dropdownRef}>
-            {searchResult.map((e, i) => (
-              <DropdownItem key={i} title={e?.title} value={e?.woeid} onSelect={onSelectCity}></DropdownItem>
-            ))}
-          </div>
-        )}
+        <Suspense fallback={<></>}>
+          {isOpenDropdown && searchResult.length > 0 && (
+            <div className="custom_dropdown" ref={dropdownRef}>
+              {searchResult.map((e, i) => (
+                <DropdownItem key={i} title={e?.title} value={e?.woeid} onSelect={onSelectCity}></DropdownItem>
+              ))}
+            </div>
+          )}
+        </Suspense>
       </Col>
     </Row>
   );

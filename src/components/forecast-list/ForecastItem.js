@@ -1,5 +1,4 @@
-import React, { memo } from 'react';
-import Col from 'react-bootstrap/Col';
+import React from 'react';
 import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
 
@@ -19,7 +18,7 @@ function ForecastItem({ date, min, max }) {
   );
 }
 
-export default memo(ForecastItem);
+export default ForecastItem;
 
 ForecastItem.propTypes = {
   date: PropTypes.string.isRequired,
