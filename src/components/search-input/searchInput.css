@@ -1,0 +1,6 @@
+.custom_dropdown {
+  border: 1px solid #ced4da;
+  position: absolute;
+  z-index: 1;
+  background: white;
+}
