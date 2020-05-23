@@ -16,27 +16,27 @@ Forecast app built purely in **react-hook**.\
 - [React Bootstrap](https://react-bootstrap.github.io/)
 - [Axios](https://github.com/axios/axios)
 
-# How to run
+## How to run
 
-## Install depedencies
+### Install depedencies
 
 `npm i`  
 or  
 `yarn`
 
-## Development mode
+### Development mode
 
 `npm start`  
 or  
 `yarn start`
 
-# How to test
+## How to test
 
 `npm run test`  
 or  
 `yarn test`
 
-# How to build
+## How to build
 
 `npm run build`  
 or  
