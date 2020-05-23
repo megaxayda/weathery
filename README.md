@@ -7,3 +7,5 @@ should display:
 1. the day of the week
 2. the minimum temperature
 3. the maximum temperature
+
+demo: https://practical-brahmagupta-8c025d.netlify.app/
