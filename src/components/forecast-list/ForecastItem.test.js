@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import sinon from 'sinon';
 import renderer from 'react-test-renderer';
 
-import App from './App';
+import expectMissingProp from 'util/expectMissingProp';
+import ForecastItem from './ForecastItem';
 
 let container = null;
 beforeEach(() => {
@@ -24,10 +25,18 @@ afterEach(() => {
   PropTypes.resetWarningCache();
 });
 
-test('render App', () => {
-  const tree = renderer.create(<App />).toJSON();
-  expect(tree).toMatchSnapshot();
+test('check props type', () => {
+  act(() => {
+    render(<ForecastItem />, container);
+  });
+
+  sinon.assert.callCount(console.error, 3);
+  expectMissingProp('date', 'ForecastItem');
+  expectMissingProp('min', 'ForecastItem');
+  expectMissingProp('max', 'ForecastItem');
 });
 
-//TODO
-//test lazy component
+test('render forecast card', () => {
+  const tree = renderer.create(<ForecastItem date={'2020-05-22'} min={12} max={30} />).toJSON();
+  expect(tree).toMatchSnapshot();
+});

@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render forecast card 1`] = `
+<div
+  className="custom_card card"
+>
+  <div
+    className="card-body"
+  >
+    <div
+      className="card-title h5"
+    >
+      Friday
+    </div>
+    <p
+      className="card-text"
+    >
+      Min: 
+      12
+    </p>
+    <p
+      className="card-text"
+    >
+      Max: 
+      30
+    </p>
+  </div>
+</div>
+`;

@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import sinon from 'sinon';
 import renderer from 'react-test-renderer';
 
-import App from './App';
+import expectMissingProp from 'util/expectMissingProp';
+import DropdownItem from './DropdownItem';
 
 let container = null;
 beforeEach(() => {
@@ -24,10 +25,18 @@ afterEach(() => {
   PropTypes.resetWarningCache();
 });
 
-test('render App', () => {
-  const tree = renderer.create(<App />).toJSON();
-  expect(tree).toMatchSnapshot();
+test('check props type', () => {
+  act(() => {
+    render(<DropdownItem />, container);
+  });
+
+  sinon.assert.callCount(console.error, 3);
+  expectMissingProp('title', 'DropdownItem');
+  expectMissingProp('value', 'DropdownItem');
+  expectMissingProp('onSelect', 'DropdownItem');
 });
 
-//TODO
-//test lazy component
+test('render DropdownItem', () => {
+  const tree = renderer.create(<DropdownItem title={'Tokyo'} value={123} onSelect={() => {}} />).toJSON();
+  expect(tree).toMatchSnapshot();
+});

@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import sinon from 'sinon';
 import renderer from 'react-test-renderer';
 
-import App from './App';
+import expectMissingProp from 'util/expectMissingProp';
+import SearchInput from './SearchInput';
 
 let container = null;
 beforeEach(() => {
@@ -24,8 +25,17 @@ afterEach(() => {
   PropTypes.resetWarningCache();
 });
 
-test('render App', () => {
-  const tree = renderer.create(<App />).toJSON();
+test('check props type', () => {
+  act(() => {
+    render(<SearchInput />, container);
+  });
+
+  sinon.assert.callCount(console.error, 1);
+  expectMissingProp('onSelect', 'SearchInput');
+});
+
+test('render SearchInput', () => {
+  const tree = renderer.create(<SearchInput onSelect={() => {}} />).toJSON();
   expect(tree).toMatchSnapshot();
 });
 

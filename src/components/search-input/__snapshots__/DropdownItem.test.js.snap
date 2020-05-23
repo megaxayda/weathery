@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render DropdownItem 1`] = `
+<a
+  className="dropdown-item"
+  href="#"
+  onClick={[Function]}
+  onKeyDown={[Function]}
+  role="button"
+>
+  Tokyo
+</a>
+`;

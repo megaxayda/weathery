@@ -1,18 +1,16 @@
-import React, { Suspense, lazy } from 'react';
+import React from 'react';
 import Row from 'react-bootstrap/Row';
 import PropTypes from 'prop-types';
 
-const ForecastItem = lazy(() => import('./ForecastItem'));
+import ForecastItem from './ForecastItem';
 
 function ForecastList({ forecastData }) {
-  if (forecastData.length > 0) {
+  if (Array.isArray(forecastData) && forecastData.length > 0) {
     return (
       <Row className="justify-content-md-center">
-        <Suspense fallback={<></>}>
-          {forecastData.map((e, i) => (
-            <ForecastItem key={i} date={e?.applicable_date} min={e?.min_temp} max={e?.max_temp}></ForecastItem>
-          ))}
-        </Suspense>
+        {forecastData.map((e) => (
+          <ForecastItem key={e.id} date={e?.applicable_date} min={e?.min_temp} max={e?.max_temp}></ForecastItem>
+        ))}
       </Row>
     );
   }
