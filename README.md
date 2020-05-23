@@ -1,9 +1,45 @@
-Create a React web app which can display a five day weather forecast based upon publicly available
-data.
-It should be fulfilled the following requirement:
-It should be able to search for a city and see the five day forecast for that city. Each day's forecast
-should display:
+# Weathery
 
-1. the day of the week
-2. the minimum temperature
-3. the maximum temperature
+Forecast app built purely in **react-hook**.\
+Demo https://practical-brahmagupta-8c025d.netlify.app/
+
+## Features:
+
+- Search city while typing.
+- Show next five day min/max temperature forecast for selected city.
+- All API are provied by [metaweather](https://www.metaweather.com/api)
+- Unit test
+
+## Libraries
+
+- [Create React App](https://github.com/facebook/create-react-app)
+- [React Bootstrap](https://react-bootstrap.github.io/)
+- [Axios](https://github.com/axios/axios)
+
+# How to run
+
+## Install depedencies
+
+`npm i`  
+or  
+`yarn`
+
+## Development mode
+
+`npm start`  
+or  
+`yarn start`
+
+# How to test
+
+`npm run test`  
+or  
+`yarn test`
+
+# How to build
+
+`npm run build`  
+or  
+`yarn build`
+
+Deploy build folder after finish building.
