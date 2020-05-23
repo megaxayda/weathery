@@ -1,13 +1,13 @@
 import React, { useRef, useEffect, useState, Suspense, lazy } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Axios from 'axios';
 import Spinner from 'react-bootstrap/Spinner';
 
 import './App.css';
 import { ERROR } from 'util/const';
+import { getFiveDayForecast } from 'util/axios';
+import SearchInput from 'components/search-input/SearchInput';
 
-const SearchInput = lazy(() => import('components/search-input/SearchInput'));
 const ForecastList = lazy(() => import('components/forecast-list/ForecastList'));
 
 function App() {
@@ -32,8 +32,10 @@ function App() {
     const callGetFiveDayAPI = async () => {
       try {
         setLoading(true);
-        const res = await Axios.get(`https://dry-anchorage-71125.herokuapp.com/https://www.metaweather.com/api/location/${cityId}/`);
+        const res = await getFiveDayForecast(cityId);
         setLoading(false);
+
+        //Get last five forecast data
         setFiveDayData(res?.data?.consolidated_weather.slice(1, 6));
       } catch (error) {
         console.log(error);
@@ -53,13 +55,13 @@ function App() {
   return (
     <Container fluid>
       <h1 className="text-center">Weathery</h1>
+      <SearchInput onSelect={onSelect}></SearchInput>
+      {isLoading && (
+        <Row className="justify-content-md-center">
+          <Spinner className="text-center" animation="border" role="status"></Spinner>
+        </Row>
+      )}
       <Suspense fallback={<></>}>
-        <SearchInput onSelect={onSelect}></SearchInput>
-        {isLoading && (
-          <Row className="justify-content-md-center">
-            <Spinner className="text-center" animation="border" role="status"></Spinner>
-          </Row>
-        )}
         <ForecastList forecastData={fivedayData}></ForecastList>
       </Suspense>
     </Container>

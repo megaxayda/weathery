@@ -5,12 +5,12 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Spinner from 'react-bootstrap/Spinner';
 import PropTypes from 'prop-types';
-import Axios from 'axios';
 
 import './searchInput.css';
 import useDebounce from 'hook/useDebounce';
 import useOnClickOutside from 'hook/useOnClickOutside';
-import { ERROR } from 'util/const';
+import { ERROR, LIMIT } from 'util/const';
+import { searchCity } from 'util/axios';
 
 const DropdownItem = lazy(() => import('./DropdownItem'));
 
@@ -18,12 +18,12 @@ function SearchInput({ onSelect }) {
   const searchInputRef = useRef();
   const dropdownRef = useRef();
   const isFirstRun = useRef(true);
+  const isSelecting = useRef(false);
   const [isOpenDropdown, setOpenDropdown] = useState(false);
   const [isLoading, setLoading] = useState(false);
-  const [isSelecting, setSelecting] = useState(false);
-  const [value, setValue] = useState('');
+  const [searchValue, setSearchValue] = useState('');
   const [searchResult, setSearchResult] = useState([]);
-  const debouncedValue = useDebounce(value, 250);
+  const debouncedValue = useDebounce(searchValue, 250);
 
   //Autofocus
   useEffect(() => {
@@ -41,13 +41,13 @@ function SearchInput({ onSelect }) {
     }
 
     //Ignore when selecting from dropdown
-    if (isSelecting) {
-      setSelecting(false);
+    if (isSelecting.current) {
+      isSelecting.current = false;
       return;
     }
 
-    //Ignore when value === ""
-    if (value === '') {
+    //Ignore when searchValue === ""
+    if (debouncedValue === '') {
       setSearchResult([]);
       return;
     }
@@ -55,11 +55,12 @@ function SearchInput({ onSelect }) {
     const callSearchCityAPI = async () => {
       try {
         setLoading(true);
-        const res = await Axios.get(
-          `https://dry-anchorage-71125.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${debouncedValue}`
-        );
+        const res = await searchCity(debouncedValue);
         setLoading(false);
-        setSearchResult(res?.data.slice(0, 10));
+
+        //get first {LIMIT: number} of array
+        setSearchResult(res?.data.slice(0, LIMIT));
+
         setOpenDropdown(true);
       } catch (error) {
         console.log(error.status);
@@ -75,13 +76,13 @@ function SearchInput({ onSelect }) {
 
   const onChange = (e) => {
     setOpenDropdown(false);
-    setValue(e?.target?.value);
+    setSearchValue(e?.target?.value);
   };
 
   const onSelectCity = (title, value) => {
+    isSelecting.current = true;
     setOpenDropdown(false);
-    setValue(title);
-    setSelecting(true);
+    setSearchValue(title);
     onSelect(value);
   };
 
@@ -89,7 +90,7 @@ function SearchInput({ onSelect }) {
     <Row className="justify-content-md-center mb-5 mt-5">
       <Col xs lg="6">
         <InputGroup className="mb-0">
-          <FormControl ref={searchInputRef} placeholder="Search city" aria-label="Search" value={value} onChange={onChange} />
+          <FormControl ref={searchInputRef} placeholder="Search city" aria-label="Search" value={searchValue} onChange={onChange} />
           {isLoading && <Spinner animation="border" role="status"></Spinner>}
         </InputGroup>
 
