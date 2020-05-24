@@ -7,8 +7,8 @@ import Spinner from 'react-bootstrap/Spinner';
 import PropTypes from 'prop-types';
 
 import './searchInput.css';
-import useDebounce from 'hook/useDebounce';
-import useOnClickOutside from 'hook/useOnClickOutside';
+import useDebounce from 'hooks/useDebounce';
+import useOnClickOutside from 'hooks/useOnClickOutside';
 import { ERROR } from 'util/const';
 import { cancelSearchCity, searchCity } from 'util/axios';
 
