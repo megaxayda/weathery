@@ -36,7 +36,7 @@ function App() {
         setLoading(false);
 
         //Get last five forecast data
-        setFiveDayData(res?.data?.consolidated_weather.slice(1, 6));
+        setFiveDayData(res);
       } catch (error) {
         console.log(error);
         setLoading(false);

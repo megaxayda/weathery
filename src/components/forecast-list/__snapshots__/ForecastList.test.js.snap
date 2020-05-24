@@ -12,20 +12,16 @@ exports[`render forecast list 1`] = `
     >
       <div
         className="card-title h5"
-      >
-        Sunday
-      </div>
+      />
       <p
         className="card-text"
       >
         Min: 
-        14.934999999999999
       </p>
       <p
         className="card-text"
       >
         Max: 
-        20.915
       </p>
     </div>
   </div>
@@ -37,20 +33,16 @@ exports[`render forecast list 1`] = `
     >
       <div
         className="card-title h5"
-      >
-        Monday
-      </div>
+      />
       <p
         className="card-text"
       >
         Min: 
-        15.855
       </p>
       <p
         className="card-text"
       >
         Max: 
-        22.990000000000002
       </p>
     </div>
   </div>
@@ -62,20 +54,16 @@ exports[`render forecast list 1`] = `
     >
       <div
         className="card-title h5"
-      >
-        Tuesday
-      </div>
+      />
       <p
         className="card-text"
       >
         Min: 
-        17.1
       </p>
       <p
         className="card-text"
       >
         Max: 
-        25.31
       </p>
     </div>
   </div>
@@ -87,20 +75,16 @@ exports[`render forecast list 1`] = `
     >
       <div
         className="card-title h5"
-      >
-        Wednesday
-      </div>
+      />
       <p
         className="card-text"
       >
         Min: 
-        18.02
       </p>
       <p
         className="card-text"
       >
         Max: 
-        26.72
       </p>
     </div>
   </div>
@@ -112,20 +96,16 @@ exports[`render forecast list 1`] = `
     >
       <div
         className="card-title h5"
-      >
-        Wednesday
-      </div>
+      />
       <p
         className="card-text"
       >
         Min: 
-        18.02
       </p>
       <p
         className="card-text"
       >
         Max: 
-        26.72
       </p>
     </div>
   </div>

@@ -9,8 +9,8 @@ import PropTypes from 'prop-types';
 import './searchInput.css';
 import useDebounce from 'hook/useDebounce';
 import useOnClickOutside from 'hook/useOnClickOutside';
-import { ERROR, LIMIT } from 'util/const';
-import { searchCity } from 'util/axios';
+import { ERROR } from 'util/const';
+import { cancelSearchCity, searchCity } from 'util/axios';
 
 const DropdownItem = lazy(() => import('./DropdownItem'));
 
@@ -55,15 +55,20 @@ function SearchInput({ onSelect }) {
     const callSearchCityAPI = async () => {
       try {
         setLoading(true);
+        if (cancelSearchCity !== undefined) {
+          cancelSearchCity('cancel');
+        }
         const res = await searchCity(debouncedValue);
         setLoading(false);
 
         //get first {LIMIT: number} of array
-        setSearchResult(res?.data.slice(0, LIMIT));
+        setSearchResult(res);
 
         setOpenDropdown(true);
       } catch (error) {
-        console.log(error.status);
+        if (error?.message === 'cancel') {
+          return;
+        }
         setLoading(false);
         setSearchResult([]);
         setOpenDropdown(false);

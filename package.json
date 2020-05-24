@@ -36,6 +36,7 @@
     ]
   },
   "devDependencies": {
+    "axios-mock-adapter": "^1.18.1",
     "react-test-renderer": "^16.13.1",
     "sinon": "^9.0.2"
   }
