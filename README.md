@@ -5,10 +5,9 @@ Forecast app built purely in **react-hook**.\
 
 ## Features:
 
-- Search city while typing.
+- Search city while typing (cancelable).
 - Show next five day min/max temperature forecast for selected city.
 - All API are provied by [metaweather](https://www.metaweather.com/api)
-- Unit test
 
 ## Libraries
 
@@ -31,6 +30,9 @@ or
 `yarn start`
 
 ## How to test
+
+- Components unit test
+- Axios unit test
 
 `npm run test`  
 or  
