@@ -1,7 +1,7 @@
 # Weathery
 
 Forecast app built purely in **react-hook**.\
-[Demo](https://practical-brahmagupta-8c025d.netlify.app)
+[Demo](https://weathery.taipham.dev/)
 
 ## Features:
 
